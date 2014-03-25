@@ -23,7 +23,7 @@
     </bean>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongo" ref="mongo" />
-        <constructor-arg name="databaseName" value="infanol" />
+        <constructor-arg name="databaseName" value="ygt_users" />
 
     </bean>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

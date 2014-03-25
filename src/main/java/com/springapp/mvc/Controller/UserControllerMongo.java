@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -19,7 +20,7 @@ public class UserControllerMongo {
 
     @Autowired
     UserService userService;
-    @RequestMapping(value = "userm",method = RequestMethod.GET)
+    @RequestMapping(value = "user",method = RequestMethod.GET)
     public ModelAndView getUser() throws ClassNotFoundException, SQLException {
 
         ModelAndView mav=new ModelAndView();
@@ -30,25 +31,26 @@ public class UserControllerMongo {
     }
 
 
-    @RequestMapping(value = "savem", method = RequestMethod.POST)
+    @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createUser(@ModelAttribute(value = "user") User u) throws SQLException, ClassNotFoundException {
       userService.addUser(u);
 
 
-        return "redirect:userm.html"  ;
+        return "redirect:user.html"  ;
     }
-    @RequestMapping(value = "deletem", method = RequestMethod.GET)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String deleteUser(@ModelAttribute(value = "user") User u) throws SQLException, ClassNotFoundException {
         userService.deleteUser(u);
 
-
-        return "redirect:userm.html"  ;
+        System.out.println("delete");
+        return "redirect:user.html"  ;
     }
-    @RequestMapping(value = "updatem", method = RequestMethod.GET)
-    public  String updateUser(@ModelAttribute(value = "user") User u,User n) throws SQLException, ClassNotFoundException {
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public  String updateUser(@ModelAttribute(value = "user") User u,@RequestParam(value = "id") String id) throws SQLException, ClassNotFoundException {
+
         userService.updateUser(u);
 
 
-        return "redirect:userm.html"  ;
+        return "redirect:user.html"  ;
     }
 }
